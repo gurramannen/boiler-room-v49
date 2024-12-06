@@ -15,7 +15,10 @@ const cities = [
     { name: "Linköping", lat: 58.4109, long: 15.6216 },
     { name: "Skellefteå", lat: 64.7500, long: 20.9500 },
     { name: "Umeå", lat: 63.8258, long: 20.2630 },
+    { name: "Helsingborg", lat: 59.3333, long: 18.0667 },
+    { name: "Stockholm", lat: 59.3333, long: 18.0667 }
 ];
+let globalWeatherData = [];
 let errorMessage = document.getElementById("error-message");
 let dataList = document.getElementById("data-list");
 function fetchCityWeather(city) {
@@ -25,7 +28,6 @@ function fetchCityWeather(city) {
             const response = yield fetch(url);
             if (!response.ok) {
                 console.log(`HTTP error! Status: ${response.status}`);
-                ;
                 switch (response.status) {
                     case 400:
                         errorMessage.textContent = "Oops! Something went wrong with your request. An error has been sent to our IT. Please try again later.";
@@ -52,6 +54,11 @@ function fetchCityWeather(city) {
                         console.error(`Unexpected error (${response.status}).`);
                         break;
                 }
+                return {
+                    name: city.name,
+                    temperature: "N/A",
+                    weatherDescription: "Error fetching data"
+                };
             }
             const data = yield response.json();
             return {
@@ -72,13 +79,35 @@ function fetchCityWeather(city) {
 }
 function fetchAllCitiesWeather() {
     return __awaiter(this, void 0, void 0, function* () {
-        dataList.innerHTML = "";
+        globalWeatherData = [];
         for (const city of cities) {
-            const weather = yield fetchCityWeather(city);
-            const listItem = document.createElement("div");
-            listItem.textContent = `${weather.name}: ${weather.temperature}°C, ${weather.weatherDescription}`;
-            dataList.appendChild(listItem);
+            const cityWeather = yield fetchCityWeather(city);
+            globalWeatherData.push(cityWeather);
+            console.log(`Weather for ${cityWeather.name}: ${cityWeather.temperature}°C, ${cityWeather.weatherDescription}`);
         }
+        displayCard();
     });
 }
 fetchAllCitiesWeather();
+function displayCard() {
+    const weatherSection = document.getElementById("weather-cards");
+    if (!weatherSection) {
+        console.error("Elementet med id 'weather-cards' hittades inte.");
+        return;
+    }
+    globalWeatherData.forEach((city) => {
+        const card = document.createElement("article");
+        const cityName = document.createElement("h2");
+        const weather = document.createElement("p");
+        const temperature = document.createElement("p");
+        card.classList.add("card");
+        cityName.classList.add("city");
+        cityName.textContent = city.name;
+        weather.classList.add("weather");
+        weather.textContent = city.weatherDescription;
+        temperature.classList.add("temperature");
+        temperature.textContent = `${city.temperature}°C`;
+        card.append(cityName, weather, temperature);
+        weatherSection.append(card);
+    });
+}

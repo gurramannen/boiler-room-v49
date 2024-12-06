@@ -1,5 +1,5 @@
-// Import the API key
-const apiKey: string = "f5d21086c0e96fb934d7912aa22ea60e";
+
+const apiKey:string = "f5d21086c0e96fb934d7912aa22ea60e";
 
 type City = {
     name: string,
@@ -14,10 +14,12 @@ const cities: City[] = [
     { name: "Linköping", lat: 58.4109, long: 15.6216 },
     { name: "Skellefteå", lat: 64.7500, long: 20.9500 },
     { name: "Umeå", lat: 63.8258, long: 20.2630 },
+    { name: "Helsingborg", lat: 59.3333, long: 18.0667 },
+    { name: "Stockholm", lat: 59.3333, long: 18.0667 }
 ];
 
 // Global variable to store weather data
-let globalWeatherData: { name: string, temperature: string, weatherDescription: string }[] = [];
+let globalWeatherData: { name: string, temperature: number, weatherDescription: string }[] = [];
 
 let errorMessage: HTMLElement = document.getElementById("error-message")!;
 let dataList: HTMLElement = document.getElementById("data-list")!;
@@ -70,19 +72,11 @@ async function fetchCityWeather(city: City) {
 
         const data = await response.json();
 
-        // Save data globally
         return {
-        globalWeatherData.push({
             name: city.name,
-            temperature: data.main.temp.toString(),
+            temperature: data.main.temp,
             weatherDescription: data.weather[0].description
-        })};
-
-        // return {
-        //     name: city.name,
-        //     temperature: data.main.temp.toString(),
-        //     weatherDescription: data.weather[0].description
-        // };
+        };
 
     } catch (error) {
         console.error(`Error fetching weather for ${city.name}:`, error);
@@ -94,23 +88,54 @@ async function fetchCityWeather(city: City) {
     }
 }
 
+
 // Fetch weather data for all cities
 async function fetchAllCitiesWeather() {
+    // Töm globalWeatherData innan vi fyller den med ny data
+    globalWeatherData = [];
+
+    // Loop över alla städer och hämta deras väderdata
     for (const city of cities) {
         const cityWeather = await fetchCityWeather(city);
 
-        // Optionally, log or display the data for each city
-        console.log(`Weather for ${cityWeather.name}: ${cityWeather.temperature}°C, ${cityWeather.weatherDescription}`);
+        // Lägg till den hämtade datan till globalWeatherData
+        globalWeatherData.push(cityWeather);
 
-        // Update the UI with the fetched data
-        const listItem = document.createElement("li");
-        listItem.textContent = `${cityWeather.name}: ${cityWeather.temperature}°C, ${cityWeather.weatherDescription}`;
-        dataList.appendChild(listItem);
+        // Logga för att kontrollera datan
+        console.log(`Weather for ${cityWeather.name}: ${cityWeather.temperature}°C, ${cityWeather.weatherDescription}`);
     }
 
-    // After all data has been fetched, you can log or process the global data
-    console.log(globalWeatherData);
+    // När vi har hämtat vädret för alla städer, visa väderkort
+    displayCard();
 }
 
-// Call the function to fetch all cities weather data
+// Kalla på funktionen för att hämta väderdata
 fetchAllCitiesWeather();
+
+
+function displayCard(): void {
+    const weatherSection = document.getElementById("weather-cards") as HTMLElement | null;
+    if (!weatherSection) {
+        console.error("Elementet med id 'weather-cards' hittades inte.");
+        return;
+    }
+
+    // Loop genom den verkliga väderdatan
+    globalWeatherData.forEach((city) => {
+        const card: HTMLElement = document.createElement("article");
+        const cityName: HTMLHeadingElement = document.createElement("h2");
+        const weather: HTMLParagraphElement = document.createElement("p");
+        const temperature: HTMLParagraphElement = document.createElement("p");
+
+        card.classList.add("card");
+        cityName.classList.add("city");
+        cityName.textContent = city.name;
+        weather.classList.add("weather");
+        weather.textContent = city.weatherDescription;
+        temperature.classList.add("temperature");
+        temperature.textContent = `${city.temperature}°C`;
+
+        card.append(cityName, weather, temperature);
+        weatherSection.append(card);
+    });
+}

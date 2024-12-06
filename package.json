@@ -21,6 +21,9 @@
   "bugs": {
     "url": "https://github.com/gurramannen/boiler-room-v49/issues"
   },
-  "homepage": "https://github.com/gurramannen/boiler-room-v49#readme"
-  
+  "homepage": "https://github.com/gurramannen/boiler-room-v49#readme",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "env": "^0.0.2"
+  }
 }
