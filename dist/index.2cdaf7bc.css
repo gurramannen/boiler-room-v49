@@ -75,12 +75,12 @@ body {
   grid-area: wind;
 }
 
-.clear {
+.clear, .klar-himmel {
   color: #1f170e;
   background-color: #22b5c0;
 }
 
-.clouds {
+.clouds, .molnigt, .delvis-molnigt {
   color: #1f170e;
   background-color: #72b0b8;
 }
@@ -90,7 +90,7 @@ body {
   background-color: #585858;
 }
 
-.rain {
+.rain, .regn, .lätt-regn {
   background-color: #3a4c64;
 }
 
@@ -103,7 +103,7 @@ body {
   background-color: #444;
 }
 
-.sunny {
+.sunny, .sol {
   color: #1f170e;
   background-color: #f5ee99;
 }
