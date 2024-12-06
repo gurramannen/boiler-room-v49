@@ -12,3 +12,9 @@ stand up 2 9:00 fredag
 Vi stötte på tekniska problem främst jag Gustav då min dator inte fungerade, så vi 
 fortsatte med våra trello kort uppgifter och bestämde att vi kör en mer genomgående standup
 kl 13:00 istället för att gå igenom appen och vad som mer behövs.
+
+stand up 3 13:00
+
+Mandus joinar oss vi går igenom vad vi har jobbat med och ställer lite frågor kring hur vi lägger in våran api key i en .env fil.
+Vi löste felet genom att bara köra api och url i TS filen.
+Vi delade ut trello korten och uppdaterade vilka trello kort som ska göras samt planerat vad alla ska göra i de olika stegen.
