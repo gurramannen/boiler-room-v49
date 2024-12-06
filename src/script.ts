@@ -23,7 +23,8 @@ type GlobalWeatherData = {
     name: string,
     icon?: string,
     temperature: number,
-    weatherDescription: string
+    weatherDescription: string,
+    weatherMain: string
 }
 
 // Global variable to store weather data
@@ -74,7 +75,8 @@ async function fetchCityWeather(city: City) {
             return {
                 name: city.name,
                 temperature: "N/A",
-                weatherDescription: "Error fetching data"
+                weatherDescription: "Error fetching data",
+                weatherMain: "🚫"
             };
         }
 
@@ -83,7 +85,8 @@ async function fetchCityWeather(city: City) {
         return {
             name: city.name,
             temperature: data.main.temp,
-            weatherDescription: data.weather[0].description
+            weatherDescription: data.weather[0].description,
+            weatherMain: data.weather[0].main
         };
 
     } catch (error) {
@@ -91,7 +94,8 @@ async function fetchCityWeather(city: City) {
         return {
             name: city.name,
             temperature: "N/A",
-            weatherDescription: "Error fetching data"
+            weatherDescription: "Error fetching data",
+            weatherMain: "🚫"
         };
     }
 }
@@ -132,25 +136,25 @@ function assignIconsToCards(cards: GlobalWeatherData[]): GlobalWeatherData[] { /
     return cards.map((card) => ({
         ...card,
         icon: (() => {
-            switch (card.weatherDescription) {
-                case 'Regn':
+            switch (card.weatherMain) {
+                case 'Rain':
                     return '🌧️';
-                case 'Sol':
-                case 'Klart':
+                case 'Sun':
+                case 'Clear':
                     return '☀️';
-                case 'Molnigt':
+                case 'Clouds':
                     return '🌥️';
-                case 'Delvis molnigt':
+                case 'Cloudsy':
                     return '🌤️';
-                case 'Dimma':
+                case 'Fog':
                     return '🌫️';
-                case 'Åska':
+                case 'Thunder':
                     return '🌩️';
-                case 'Snö':
+                case 'Snow':
                     return '❄️';
                 case 'Storm':
                     return '⛈️🌪️';
-                case 'Blåsigt':
+                case 'Windy':
                     return '💨';
                 default:
                     return '';
