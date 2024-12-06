@@ -126,7 +126,7 @@ function assignIconsToCards(cards: GlobalWeatherData[]): GlobalWeatherData[] { /
                     return '🌩️';
                 case 'Snow':
                     return '❄️';
-                case 'Storm':
+                case 'storm':
                     return '⛈️🌪️';
                 case 'Windy':
                     return '💨';

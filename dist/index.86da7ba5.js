@@ -140,7 +140,7 @@ function assignIconsToCards(cards) {
                         return "\uD83C\uDF29\uFE0F";
                     case 'Snow':
                         return "\u2744\uFE0F";
-                    case 'Storm':
+                    case 'storm':
                         return "\u26C8\uFE0F\uD83C\uDF2A\uFE0F";
                     case 'Windy':
                         return "\uD83D\uDCA8";
@@ -162,7 +162,7 @@ function displayCard(array) {
         const cityName = document.createElement("h2");
         const weather = document.createElement("p");
         const temperature = document.createElement("p");
-        card.classList.add("card");
+        card.classList.add("card", city.weatherDescription.split(" ").join("-"));
         cityName.classList.add("city");
         cityName.textContent = city.name;
         if (city.icon) {
