@@ -59,12 +59,16 @@ function assignIconsToCards(cards: Card[]): Card[] { // todo: Replace placeholde
             switch (card.weather) {
                 case 'Regn':
                     return '🌧️';
-                case 'Sol' || 'Klart':
+                case 'Sol':
+                case 'Klart':
                     return '☀️';
                 case 'Moln':
                     return '🌥️';
                 case 'Delvis molnigt':
                     return '🌤️';
+                case 'Dimma':
+                    return '🌫️';
+                case 'Storm':
                 default:
                     return '';
             }
