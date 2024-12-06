@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "@parcel/transformer-sass": "^2.13.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7"
   }
 }

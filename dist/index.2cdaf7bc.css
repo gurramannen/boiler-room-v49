@@ -1,2 +1,118 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
+html {
+  width: 100vw;
+}
+
+header {
+  color: #002028;
+  text-align: center;
+  background-color: #599fa4;
+  width: 100vw;
+  padding: 1rem;
+}
+
+body {
+  color: #fff;
+  background-color: #292929;
+  width: 100vw;
+}
+
+#weather-cards {
+  background-color: inherit;
+  border: 1px solid #a63535;
+  flex-flow: wrap;
+  justify-content: center;
+  margin: 2rem;
+  display: flex;
+}
+
+.card {
+  background-color: #444;
+  border-radius: .8rem;
+  grid-template: "city icon" 2fr
+                 "weather temperature" 2fr
+                 "humidity wind" 1fr
+                 / 2fr;
+  gap: .3rem;
+  width: 250px;
+  margin: 1rem;
+  padding: 1rem;
+  display: grid;
+}
+
+.city {
+  grid-area: city;
+  font-size: 30px;
+}
+
+.icon {
+  text-align: end;
+  grid-area: icon;
+  font-size: 30px;
+}
+
+.weather {
+  grid-area: weather;
+  font-size: 20px;
+}
+
+.temperature {
+  text-align: end;
+  grid-area: temperature;
+  font-size: 30px;
+}
+
+.humidity {
+  grid-area: humidity;
+}
+
+.wind {
+  grid-area: wind;
+}
+
+.clear {
+  color: #1f170e;
+  background-color: #22b5c0;
+}
+
+.clouds {
+  color: #1f170e;
+  background-color: #72b0b8;
+}
+
+.fog {
+  color: #fff;
+  background-color: #585858;
+}
+
+.rain {
+  background-color: #3a4c64;
+}
+
+.snow {
+  color: #292929;
+  background-color: azure;
+}
+
+.storm {
+  background-color: #444;
+}
+
+.sunny {
+  color: #1f170e;
+  background-color: #f5ee99;
+}
+
+.thunderstorm {
+  background-color: #0d203a;
+}
+
+.windy {
+  background-color: #585858;
+}
 /*# sourceMappingURL=index.2cdaf7bc.css.map */
