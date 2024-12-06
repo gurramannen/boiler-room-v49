@@ -167,7 +167,9 @@ function getFromLocalStorage<T>(key: string): T | null {
 }
 
 const retrievedWeatherCards = getFromLocalStorage<CityWeather[]>('weatherCards');
-console.log(retrievedWeatherCards); // This will log your array of cards
+console.log(retrievedWeatherCards); // This will log your array of cards'
+
+
 
 const citySelect = document.getElementById("city-select") as HTMLSelectElement;
 
@@ -181,12 +183,12 @@ citySelect.addEventListener("change", () => {
     const selectedCity = cities.find((city) => city.name === selectedCityName);
   
     if (selectedCity) {
-      fetchWeather(selectedCity.lat, selectedCity.long);
+        fetchCityWeather(selectedCity.lat, selectedCity.long);
     }
   });
 
 const initialCity = cities[0];
-fetchWeather(initialCity.lat, initialCity.long);
+fetchCityWeather(initialCity.lat, initialCity.long);
 
 
 // todo: Function to assign icons to array objects
