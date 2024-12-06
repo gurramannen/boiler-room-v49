@@ -1,14 +1,10 @@
-//? Mockdata
-
 const apiKey:string = "f5d21086c0e96fb934d7912aa22ea60e";
-
 type City = {
     name: string,
     icon?: string
     lat: number,
     long: number
 };
-
 // Array of all cities
 const cities: City[] = [
     { name: "Göteborg", lat: 57.7089, long: 11.9746 },
@@ -23,21 +19,18 @@ type GlobalWeatherData = {
     name: string,
     icon?: string,
     temperature: number,
-    weatherDescription: string
+    weatherDescription: string,
+    weatherMain: string
 }
-
 // Global variable to store weather data
 let globalWeatherData: GlobalWeatherData[] = [];
-
 let errorMessage: HTMLElement = document.getElementById("error-message")!;
 let dataList: HTMLElement = document.getElementById("data-list")!;
-
 // Function to fetch data for a specific city
 async function fetchCityWeather(city: City) {
     const url: string = `https://api.openweathermap.org/data/2.5/weather?lat=${city.lat}&lon=${city.long}&appid=${apiKey}&units=metric&lang=sv`;
     try {
         const response = await fetch(url);
-
         if (!response.ok) {
             console.log(`HTTP error! Status: ${response.status}`);
             switch (response.status) {
@@ -45,27 +38,22 @@ async function fetchCityWeather(city: City) {
                     errorMessage.textContent = "Oops! Something went wrong with your request. An error has been sent to our IT. Please try again later.";
                     console.error("Invalid request (400). Check your URL.");
                     break;
-
                 case 401:
                     errorMessage.textContent = "Access denied. An error has been sent to our IT. Please try again later.";
                     console.error("Unauthorized access (401). Invalid API key.");
                     break;
-
                 case 404:
                     errorMessage.textContent = "We couldn't find what you're looking for. An error has been sent to our IT. Please try again later.";
                     console.error("Resource not found (404).");
                     break;
-
                 case 429:
                     errorMessage.textContent = "You're making too many requests! Please wait a while before trying again.";
                     console.error("Too many requests (429). Max limit of 1000 searches per day reached.");
                     break;
-
                 case 500:
                     errorMessage.textContent = "Something went wrong on our end. An error has been sent to our IT. Please try again later.";
                     console.error("Server error (500). Try again later.");
                     break;
-
                 default:
                     errorMessage.textContent = "An unexpected error occurred. Please try again.";
                     console.error(`Unexpected error (${response.status}).`);
@@ -74,83 +62,73 @@ async function fetchCityWeather(city: City) {
             return {
                 name: city.name,
                 temperature: "N/A",
-                weatherDescription: "Error fetching data"
+                weatherDescription: "Error fetching data",
+                weatherMain: ":no_entry_sign:"
             };
         }
-
         const data = await response.json();
-
         return {
             name: city.name,
             temperature: data.main.temp,
-            weatherDescription: data.weather[0].description
+            weatherDescription: data.weather[0].description,
+            weatherMain: data.weather[0].main
         };
-
     } catch (error) {
         console.error(`Error fetching weather for ${city.name}:`, error);
         return {
             name: city.name,
             temperature: "N/A",
-            weatherDescription: "Error fetching data"
+            weatherDescription: "Error fetching data",
+            weatherMain: ":no_entry_sign:"
         };
     }
 }
-
-
 // Fetch weather data for all cities
 async function fetchAllCitiesWeather() {
     // Töm globalWeatherData innan vi fyller den med ny data
     globalWeatherData = [];
-
     // Loop över alla städer och hämta deras väderdata
     for (const city of cities) {
         const cityWeather = await fetchCityWeather(city);
-
         // Lägg till den hämtade datan till globalWeatherData
         globalWeatherData.push(cityWeather);
-
         // Logga för att kontrollera datan
         console.log(`Weather for ${cityWeather.name}: ${cityWeather.temperature}°C, ${cityWeather.weatherDescription}`);
     }
-
     return globalWeatherData;
-
     // När vi har hämtat vädret för alla städer, visa väderkort
 /*     displayCard(); */
 }
-
 // Kalla på funktionen för att hämta väderdata
 fetchAllCitiesWeather().then((weatherData) => {
     const cardsWithIcons = assignIconsToCards(weatherData);
     console.log(cardsWithIcons);
-
     return displayCard(cardsWithIcons);
 });
-
 // todo: Function to assign icons to array objects
 function assignIconsToCards(cards: GlobalWeatherData[]): GlobalWeatherData[] { // todo: Replace placeholder strings with actual
     return cards.map((card) => ({
         ...card,
         icon: (() => {
-            switch (card.weatherDescription) {
-                case 'Regn':
+            switch (card.weatherMain) {
+                case 'Rain':
                     return '🌧️';
-                case 'Sol':
-                case 'Klart':
+                case 'Sun':
+                case 'Clear':
                     return '☀️';
-                case 'Molnigt':
+                case 'Clouds':
                     return '🌥️';
-                case 'Delvis molnigt':
+                case 'Cloudsy':
                     return '🌤️';
-                case 'Dimma':
+                case 'Fog':
                     return '🌫️';
-                case 'Åska':
+                case 'Thunder':
                     return '🌩️';
-                case 'Snö':
+                case 'Snow':
                     return '❄️';
                 case 'Storm':
                     return '⛈️🌪️';
-                case 'Blåsigt':
+                case 'Windy':
                     return '💨';
                 default:
                     return '';
@@ -158,21 +136,18 @@ function assignIconsToCards(cards: GlobalWeatherData[]): GlobalWeatherData[] { /
         })(),
     }));
 }
-
 function displayCard(array: GlobalWeatherData[]): void {
     const weatherSection = document.getElementById("weather-cards") as HTMLElement | null;
     if (!weatherSection) {
         console.error("Elementet med id 'weather-cards' hittades inte.");
         return;
     }
-
     // Loop genom den verkliga väderdatan
     array.forEach((city) => {
         const card: HTMLElement = document.createElement("article");
         const cityName: HTMLHeadingElement = document.createElement("h2");
         const weather: HTMLParagraphElement = document.createElement("p");
         const temperature: HTMLParagraphElement = document.createElement("p");
-
         card.classList.add("card");
         cityName.classList.add("city");
         cityName.textContent = city.name;
@@ -186,14 +161,10 @@ function displayCard(array: GlobalWeatherData[]): void {
         weather.textContent = city.weatherDescription;
         temperature.classList.add("temperature");
         temperature.textContent = `${city.temperature}°C`;
-
         card.append(cityName, weather, temperature);
         weatherSection.append(card);
     });
 }
-
-
-
 function saveToLocalStorage<T>(key: string, data: T): void {
     try {
         localStorage.setItem(key, JSON.stringify(data));
@@ -201,11 +172,8 @@ function saveToLocalStorage<T>(key: string, data: T): void {
         console.error(`Failed to save data to local storage with key "${key}"`, error);
     }
 }
-
 const weatherCards: GlobalWeatherData[] = globalWeatherData; //todo add cards
 saveToLocalStorage('weatherCards', weatherCards); // runs saveToLocalStorage for each card in the array
-
-
 /* Get data from local storage */
 function getFromLocalStorage<T>(key: string): T | null {
     try {
@@ -216,6 +184,5 @@ function getFromLocalStorage<T>(key: string): T | null {
         return null;
     }
 }
-
 const retrievedWeatherCards = getFromLocalStorage<City[]>('weatherCards');
 console.log(retrievedWeatherCards); // This will log your array of cards
