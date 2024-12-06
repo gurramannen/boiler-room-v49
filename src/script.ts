@@ -1,5 +1,5 @@
 
-type Card = { // Card interface, temporary
+type Card = { //! Card interface type, temporary
     city: string,
     icon?: string,
     weather: string,
