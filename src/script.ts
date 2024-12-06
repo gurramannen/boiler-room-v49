@@ -17,7 +17,7 @@ function saveToLocalStorage<T>(key: string, data: T): void {
     }
 }
 
-const weatherCards: Card[] = [...];
+const weatherCards: Card[] = [...]; //todo add cards
 saveToLocalStorage('weatherCards', weatherCards); // runs saveToLocalStorage for each card in the array
 
 
