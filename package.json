@@ -1,5 +1,26 @@
 {
-  "devDependencies": {
-    "@parcel/transformer-sass": "^2.13.2"
-  }
+  "name": "boiler-room-v49",
+  "version": "1.0.0",
+  "description": "It´s a weather app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gurramannen/boiler-room-v49.git"
+  },
+  "keywords": [
+    "weather",
+    "app",
+    "boiler",
+    "room"
+  ],
+  "author": "Benjamin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gurramannen/boiler-room-v49/issues"
+  },
+  "homepage": "https://github.com/gurramannen/boiler-room-v49#readme"
+  
 }
