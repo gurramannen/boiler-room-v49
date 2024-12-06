@@ -133,24 +133,24 @@ function assignIconsToCards(cards: GlobalWeatherData[]): GlobalWeatherData[] { /
         ...card,
         icon: (() => {
             switch (card.weatherDescription) {
-                case 'Regn':
+                case 'regn':
                     return '🌧️';
-                case 'Sol':
-                case 'Klart':
+                case 'sol':
+                case 'klar himmel':
                     return '☀️';
-                case 'Molnigt':
+                case 'molnigt':
                     return '🌥️';
-                case 'Delvis molnigt':
+                case 'delvis molnigt':
                     return '🌤️';
-                case 'Dimma':
+                case 'dimma':
                     return '🌫️';
-                case 'Åska':
+                case 'åska':
                     return '🌩️';
-                case 'Snö':
+                case 'snö':
                     return '❄️';
-                case 'Storm':
+                case 'storm':
                     return '⛈️🌪️';
-                case 'Blåsigt':
+                case 'blåsigt':
                     return '💨';
                 default:
                     return '';

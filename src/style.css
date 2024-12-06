@@ -38,12 +38,12 @@
     /*** Weather Cards ***/
     .card  {
         display: grid;
-        grid-template-columns: 2fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-template-rows: 2fr 2fr 1fr;
         grid-template-areas: 
-            "city icon"
-            "weather temperature"
-            "humidity wind"
+            "city city city icon"
+            "weather weather temperature temperature"
+            "humidity humidity wind wind"
             ;
         gap: .3rem;
         margin: 1rem;
@@ -73,7 +73,6 @@
         grid-area: temperature;
         font-size: 30px;
         text-align: end;
-       /*  align-self: center; */
     }
 
     .humidity {  

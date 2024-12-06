@@ -123,24 +123,24 @@ function assignIconsToCards(cards) {
             ...card,
             icon: (()=>{
                 switch(card.weatherDescription){
-                    case 'Regn':
+                    case 'regn':
                         return "\uD83C\uDF27\uFE0F";
-                    case 'Sol':
-                    case 'Klart':
+                    case 'sol':
+                    case 'klar himmel':
                         return "\u2600\uFE0F";
-                    case 'Molnigt':
+                    case 'molnigt':
                         return "\uD83C\uDF25\uFE0F";
-                    case 'Delvis molnigt':
+                    case 'delvis molnigt':
                         return "\uD83C\uDF24\uFE0F";
-                    case 'Dimma':
+                    case 'dimma':
                         return "\uD83C\uDF2B\uFE0F";
-                    case "\xc5ska":
+                    case "\xe5ska":
                         return "\uD83C\uDF29\uFE0F";
-                    case "Sn\xf6":
+                    case "sn\xf6":
                         return "\u2744\uFE0F";
-                    case 'Storm':
+                    case 'storm':
                         return "\u26C8\uFE0F\uD83C\uDF2A\uFE0F";
-                    case "Bl\xe5sigt":
+                    case "bl\xe5sigt":
                         return "\uD83D\uDCA8";
                     default:
                         return '';
