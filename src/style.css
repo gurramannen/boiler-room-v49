@@ -126,5 +126,17 @@
         background-color: #585858;
     }
 
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      
+      select {
+        padding: 8px;
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+
 
 
