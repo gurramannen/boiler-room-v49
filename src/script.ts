@@ -8,20 +8,21 @@ type CityWeather = {
 const cityWeather : CityWeather[] = [
     {
       name: "Göteborg",
-      weatherDescription: "Sunny with a few clouds",
+      weatherDescription: "Sol",
       temperatur: 18, 
     },
     {
       name: "Malmö",
-      weatherDescription: "Overcast with light rain",
+      weatherDescription: "Molning",
       temperatur: 15, 
     },
     {
       name: "Umeå",
-      weatherDescription: "Clear sky",
+      weatherDescription: "Klart",
       temperatur: 10, 
     },
   ];
+  //? mockdata slut
 
 function displayCard(): void {
     const weatherSection = document.getElementById("weather-cards") as HTMLElement | null;
@@ -30,7 +31,7 @@ function displayCard(): void {
       return;
     }
 
-    cityWeather.forEach((city) => { //!väntar på Benji
+    cityWeather.forEach((city) => { 
         const card: HTMLElement = document.createElement("article")
         const cityName: HTMLHeadingElement = document.createElement("h2");
         const weather: HTMLParagraphElement = document.createElement("p");

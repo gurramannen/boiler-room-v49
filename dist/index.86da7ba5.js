@@ -2,20 +2,21 @@
 const cityWeather = [
     {
         name: "G\xf6teborg",
-        weatherDescription: "Sunny with a few clouds",
+        weatherDescription: "Sol",
         temperatur: 18
     },
     {
         name: "Malm\xf6",
-        weatherDescription: "Overcast with light rain",
+        weatherDescription: "Molning",
         temperatur: 15
     },
     {
         name: "Ume\xe5",
-        weatherDescription: "Clear sky",
+        weatherDescription: "Klart",
         temperatur: 10
     }
 ];
+//? mockdata slut
 function displayCard() {
     const weatherSection = document.getElementById("weather-cards");
     if (!weatherSection) {
