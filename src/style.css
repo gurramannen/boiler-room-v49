@@ -1,16 +1,5 @@
 
 
-/* <main>
-        <section id="weather-cards">
-            <article class="card">
-                <h2 class="city">City Name</h2>
-                <h3 class="weather">Weather</h3>
-                <h3 class="temperature">Temp</h3>
-                <h4 class="humidity">Humidity</h4>
-                <h5 class="wind">Wind</h5>
-            </article>
-        </section>
-    </main> */
     * {
         margin: 0;
         padding: 0;
@@ -50,30 +39,41 @@
     .card  {
         display: grid;
         grid-template-columns: 2fr;
-        grid-template-rows: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 2fr 2fr 1fr;
         grid-template-areas: 
-            "city city"
+            "city icon"
             "weather temperature"
-            "wind temperature"
-            "humidity humidity"
+            "humidity wind"
             ;
         gap: .3rem;
-        background-color: #444;
         margin: 1rem;
         padding: 1rem;
         border-radius: .8rem;
+        background-color: #444;
+        width: 250px;
     }
 
     .city {
         grid-area: city;
+        font-size: 30px;
+    }
+
+    .icon {
+        grid-area: icon;
+        font-size: 30px;
+        text-align: end;
     }
 
     .weather {
         grid-area: weather;
+        font-size: 20px;
     }
 
     .temperature {  
         grid-area: temperature;
+        font-size: 30px;
+        text-align: end;
+       /*  align-self: center; */
     }
 
     .humidity {  
