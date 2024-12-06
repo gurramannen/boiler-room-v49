@@ -78,21 +78,24 @@ async function fetchCityWeather(city) {
             return {
                 name: city.name,
                 temperature: "N/A",
-                weatherDescription: "Error fetching data"
+                weatherDescription: "Error fetching data",
+                weatherMain: "\uD83D\uDEAB"
             };
         }
         const data = await response.json();
         return {
             name: city.name,
             temperature: data.main.temp,
-            weatherDescription: data.weather[0].description
+            weatherDescription: data.weather[0].description,
+            weatherMain: data.weather[0].main
         };
     } catch (error) {
         console.error(`Error fetching weather for ${city.name}:`, error);
         return {
             name: city.name,
             temperature: "N/A",
-            weatherDescription: "Error fetching data"
+            weatherDescription: "Error fetching data",
+            weatherMain: "\uD83D\uDEAB"
         };
     }
 }
@@ -122,25 +125,25 @@ function assignIconsToCards(cards) {
     return cards.map((card)=>({
             ...card,
             icon: (()=>{
-                switch(card.weatherDescription){
-                    case 'regn':
+                switch(card.weatherMain){
+                    case 'Rain':
                         return "\uD83C\uDF27\uFE0F";
-                    case 'sol':
-                    case 'klar himmel':
+                    case 'Sun':
+                    case 'Clear':
                         return "\u2600\uFE0F";
-                    case 'molnigt':
+                    case 'Clouds':
                         return "\uD83C\uDF25\uFE0F";
-                    case 'delvis molnigt':
+                    case 'Cloudsy':
                         return "\uD83C\uDF24\uFE0F";
-                    case 'dimma':
+                    case 'Fog':
                         return "\uD83C\uDF2B\uFE0F";
-                    case "\xe5ska":
+                    case 'Thunder':
                         return "\uD83C\uDF29\uFE0F";
-                    case "sn\xf6":
+                    case 'Snow':
                         return "\u2744\uFE0F";
                     case 'storm':
                         return "\u26C8\uFE0F\uD83C\uDF2A\uFE0F";
-                    case "bl\xe5sigt":
+                    case 'Windy':
                         return "\uD83D\uDCA8";
                     default:
                         return '';
