@@ -219,3 +219,22 @@ function getFromLocalStorage<T>(key: string): T | null {
 
 const retrievedWeatherCards = getFromLocalStorage<City[]>('weatherCards');
 console.log(retrievedWeatherCards); // This will log your array of cards
+
+const citySelect = document.getElementById("city-select") as HTMLSelectElement;
+const initialCity = cities[0]; // Första staden i arrayen
+fetchCityWeather(initialCity);
+
+// Kontrollera att elementet faktiskt hittas
+if (!citySelect) {
+  throw new Error("Elementet med id 'city-select' hittades inte.");
+}
+
+citySelect.addEventListener("change", () => {
+    const selectedCityName = citySelect.value;
+    const selectedCity = cities.find((city) => city.name === selectedCityName);
+  
+    if (selectedCity) {
+        fetchCityWeather(selectedCity.lat, selectedCity.long);
+    }
+  });
+  
