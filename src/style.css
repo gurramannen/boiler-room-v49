@@ -22,19 +22,24 @@
     }
 
     header {
-
+        width: 100vw;
+        padding: 1rem;
+        background-color: #599fa4;
+        color: #002028;
+        text-align: center;
     }
     
     body {
         width: 100vw;
-        background-color: #333;
+        background-color: #292929;
         color: #fff;
         
     }
 
     #weather-cards {
+        margin: 2rem;
         border: #a63535 solid 1px; /* temporary border */
-        background-color: #444;
+        background-color: inherit;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;

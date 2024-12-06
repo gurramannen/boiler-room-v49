@@ -8,17 +8,26 @@ html {
   width: 100vw;
 }
 
+header {
+  color: #002028;
+  text-align: center;
+  background-color: #599fa4;
+  width: 100vw;
+  padding: 1rem;
+}
+
 body {
   color: #fff;
-  background-color: #333;
+  background-color: #292929;
   width: 100vw;
 }
 
 #weather-cards {
-  background-color: #444;
+  background-color: inherit;
   border: 1px solid #a63535;
   flex-flow: wrap;
   justify-content: center;
+  margin: 2rem;
   display: flex;
 }
 
