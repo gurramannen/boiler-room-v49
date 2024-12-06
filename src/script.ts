@@ -152,7 +152,7 @@ function assignIconsToCards(cards: GlobalWeatherData[]): GlobalWeatherData[] { /
                     return '🌩️';
                 case 'Snow':
                     return '❄️';
-                case 'Storm':
+                case 'storm':
                     return '⛈️🌪️';
                 case 'Windy':
                     return '💨';
@@ -177,7 +177,7 @@ function displayCard(array: GlobalWeatherData[]): void {
         const weather: HTMLParagraphElement = document.createElement("p");
         const temperature: HTMLParagraphElement = document.createElement("p");
 
-        card.classList.add("card");
+        card.classList.add("card", city.weatherDescription.split(" ").join("-"));
         cityName.classList.add("city");
         cityName.textContent = city.name;
         if (city.icon) {
