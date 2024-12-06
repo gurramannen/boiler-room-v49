@@ -1,25 +1,55 @@
+//? Mockdata
+type CityWeather = {
+    name: string;
+    weatherDescription: string;
+    temperatur: number; 
+  };
+
+const cityWeather : CityWeather[] = [
+    {
+      name: "Göteborg",
+      weatherDescription: "Sunny with a few clouds",
+      temperatur: 18, 
+    },
+    {
+      name: "Malmö",
+      weatherDescription: "Overcast with light rain",
+      temperatur: 15, 
+    },
+    {
+      name: "Umeå",
+      weatherDescription: "Clear sky",
+      temperatur: 10, 
+    },
+  ];
+
 function displayCard(): void {
-const weatherSection: HTMLElement | null = document.getElementById("weather-cards") as HTMLElement;
-const card: HTMLElement = document.createElement("article")
-const cityName: HTMLHeadElement = document.createElement("h2");
-const weather: HTMLElement = document.createElement("h3");
-const temperature: HTMLElement = document.createElement("h3");
+    const weatherSection = document.getElementById("weather-cards") as HTMLElement | null;
+    if (!weatherSection) {
+      console.error("Elementet med id 'weather-cards' hittades inte.");
+      return;
+    }
 
-card.append(cityName);
-card.classList.add("card");
+    cityWeather.forEach((city) => { //!väntar på Benji
+        const card: HTMLElement = document.createElement("article")
+        const cityName: HTMLHeadingElement = document.createElement("h2");
+        const weather: HTMLParagraphElement = document.createElement("p");
+        const temperature: HTMLParagraphElement = document.createElement("p");
 
-cityName.classList.add("city");
-cityName.textContent = "TBA";
+        card.classList.add("card");
 
-card.append(weather);
-weather.classList.add("weather");
-weather.textContent = "TBA";
+        cityName.classList.add("city");
+        cityName.textContent = city.name;
 
-card.append(temperature);
-temperature.classList.add("temperature");
-temperature.textContent = "TBA";
+        weather.classList.add("weather");
+        weather.textContent = city.weatherDescription;
 
-weatherSection.append(card);
+        temperature.classList.add("temperature");
+        temperature.textContent = `${city.temperatur}°C`;
+        
+        card.append(cityName, weather, temperature);
+        weatherSection.append(card);
+    });
 }
 
 displayCard();
