@@ -102,18 +102,21 @@ async function fetchAllCitiesWeather() {
     globalWeatherData = [];
     // Loop över alla städer och hämta deras väderdata
     for (const city of cities){
-        const cityWeather1 = await fetchCityWeather(city);
+        const cityWeather = await fetchCityWeather(city);
         // Lägg till den hämtade datan till globalWeatherData
-        globalWeatherData.push(cityWeather1);
+        globalWeatherData.push(cityWeather);
         // Logga för att kontrollera datan
-        console.log(`Weather for ${cityWeather1.name}: ${cityWeather1.temperature}\xb0C, ${cityWeather1.weatherDescription}`);
+        console.log(`Weather for ${cityWeather.name}: ${cityWeather.temperature}\xb0C, ${cityWeather.weatherDescription}`);
     }
+    return globalWeatherData;
 // När vi har hämtat vädret för alla städer, visa väderkort
 /*     displayCard(); */ }
 // Kalla på funktionen för att hämta väderdata
-const weatherData = fetchAllCitiesWeather();
-const cardsWithIcons = assignIconsToCards(weatherData);
-console.log(cardsWithIcons);
+fetchAllCitiesWeather().then((weatherData)=>{
+    const cardsWithIcons = assignIconsToCards(weatherData);
+    console.log(cardsWithIcons);
+    return displayCard(cardsWithIcons);
+});
 // todo: Function to assign icons to array objects
 function assignIconsToCards(cards) {
     return cards.map((card)=>({
@@ -181,7 +184,7 @@ function saveToLocalStorage(key, data) {
         console.error(`Failed to save data to local storage with key "${key}"`, error);
     }
 }
-const weatherCards = cityWeather; //todo add cards
+const weatherCards = globalWeatherData; //todo add cards
 saveToLocalStorage('weatherCards', weatherCards); // runs saveToLocalStorage for each card in the array
 /* Get data from local storage */ function getFromLocalStorage(key) {
     try {
@@ -194,6 +197,5 @@ saveToLocalStorage('weatherCards', weatherCards); // runs saveToLocalStorage for
 }
 const retrievedWeatherCards = getFromLocalStorage('weatherCards');
 console.log(retrievedWeatherCards); // This will log your array of cards
-displayCard(cardsWithIcons); //! runs the function and displays the cards
 
 //# sourceMappingURL=index.86da7ba5.js.map

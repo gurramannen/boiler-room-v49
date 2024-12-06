@@ -113,18 +113,22 @@ async function fetchAllCitiesWeather() {
         console.log(`Weather for ${cityWeather.name}: ${cityWeather.temperature}°C, ${cityWeather.weatherDescription}`);
     }
 
+    return globalWeatherData;
+
     // När vi har hämtat vädret för alla städer, visa väderkort
 /*     displayCard(); */
 }
 
 // Kalla på funktionen för att hämta väderdata
-const weatherData = fetchAllCitiesWeather();
+fetchAllCitiesWeather().then((weatherData) => {
+    const cardsWithIcons = assignIconsToCards(weatherData);
+    console.log(cardsWithIcons);
 
-const cardsWithIcons = assignIconsToCards(weatherData);
-console.log(cardsWithIcons);
+    return displayCard(cardsWithIcons);
+});
 
 // todo: Function to assign icons to array objects
-function assignIconsToCards(cards: GlobalWeatherData[]): GlobalWeatherData { // todo: Replace placeholder strings with actual
+function assignIconsToCards(cards: GlobalWeatherData[]): GlobalWeatherData[] { // todo: Replace placeholder strings with actual
     return cards.map((card) => ({
         ...card,
         icon: (() => {
@@ -198,7 +202,7 @@ function saveToLocalStorage<T>(key: string, data: T): void {
     }
 }
 
-const weatherCards: GlobalWeatherData[] = cityWeather; //todo add cards
+const weatherCards: GlobalWeatherData[] = globalWeatherData; //todo add cards
 saveToLocalStorage('weatherCards', weatherCards); // runs saveToLocalStorage for each card in the array
 
 
@@ -215,9 +219,3 @@ function getFromLocalStorage<T>(key: string): T | null {
 
 const retrievedWeatherCards = getFromLocalStorage<City[]>('weatherCards');
 console.log(retrievedWeatherCards); // This will log your array of cards
-
-
-
-
-
-displayCard(cardsWithIcons); //! runs the function and displays the cards
