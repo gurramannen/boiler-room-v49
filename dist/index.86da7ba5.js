@@ -7,7 +7,7 @@ const cityWeather = [
     },
     {
         name: "Malm\xf6",
-        weatherDescription: "Molning",
+        weatherDescription: "Molnigt",
         temperatur: 15
     },
     {
@@ -17,13 +17,14 @@ const cityWeather = [
     }
 ];
 //? mockdata slut
-function displayCard() {
+function displayCard(array) {
+    console.log("displayCard is running for", array); //! test, remove this before production
     const weatherSection = document.getElementById("weather-cards");
     if (!weatherSection) {
         console.error("Elementet med id 'weather-cards' hittades inte.");
         return;
     }
-    cityWeather.forEach((city)=>{
+    array.forEach((city)=>{
         const card = document.createElement("article");
         const cityName = document.createElement("h2");
         const weather = document.createElement("p");
@@ -31,6 +32,12 @@ function displayCard() {
         card.classList.add("card");
         cityName.classList.add("city");
         cityName.textContent = city.name;
+        if (city.icon) {
+            const icon = document.createElement("p");
+            icon.classList.add("icon");
+            icon.textContent = city.icon;
+            card.appendChild(icon);
+        }
         weather.classList.add("weather");
         weather.textContent = city.weatherDescription;
         temperature.classList.add("temperature");
@@ -39,20 +46,6 @@ function displayCard() {
         weatherSection.append(card);
     });
 }
-displayCard();
-// mock-array with weather cards // todo gör så att icon läggs in
-const cards = [
-    {
-        city: "G\xf6teborg",
-        weather: 'Regn',
-        temperature: "5 \xb0C"
-    },
-    {
-        city: "Malm\xf6",
-        weather: 'Sol',
-        temperature: "8 \xb0C"
-    }
-];
 function saveToLocalStorage(key, data) {
     try {
         localStorage.setItem(key, JSON.stringify(data));
@@ -60,7 +53,7 @@ function saveToLocalStorage(key, data) {
         console.error(`Failed to save data to local storage with key "${key}"`, error);
     }
 }
-const weatherCards = cards; //todo add cards
+const weatherCards = cityWeather; //todo add cards
 saveToLocalStorage('weatherCards', weatherCards); // runs saveToLocalStorage for each card in the array
 /* Get data from local storage */ function getFromLocalStorage(key) {
     try {
@@ -78,26 +71,34 @@ function assignIconsToCards(cards) {
     return cards.map((card)=>({
             ...card,
             icon: (()=>{
-                switch(card.weather){
+                switch(card.weatherDescription){
                     case 'Regn':
                         return "\uD83C\uDF27\uFE0F";
                     case 'Sol':
                     case 'Klart':
                         return "\u2600\uFE0F";
-                    case 'Moln':
+                    case 'Molnigt':
                         return "\uD83C\uDF25\uFE0F";
                     case 'Delvis molnigt':
                         return "\uD83C\uDF24\uFE0F";
                     case 'Dimma':
                         return "\uD83C\uDF2B\uFE0F";
+                    case "\xc5ska":
+                        return "\uD83C\uDF29\uFE0F";
+                    case "Sn\xf6":
+                        return "\u2744\uFE0F";
                     case 'Storm':
+                        return "\u26C8\uFE0F\uD83C\uDF2A\uFE0F";
+                    case "Bl\xe5sigt":
+                        return "\uD83D\uDCA8";
                     default:
                         return '';
                 }
             })()
         }));
 }
-const cardsWithIcons = assignIconsToCards(cards);
+const cardsWithIcons = assignIconsToCards(weatherCards);
 console.log(cardsWithIcons);
+displayCard(cardsWithIcons); //! runs the function and displays the cards
 
 //# sourceMappingURL=index.86da7ba5.js.map

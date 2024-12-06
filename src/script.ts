@@ -1,6 +1,7 @@
 //? Mockdata
 type CityWeather = {
     name: string;
+    icon?: string;
     weatherDescription: string;
     temperatur: number; 
   };
@@ -13,7 +14,7 @@ const cityWeather : CityWeather[] = [
     },
     {
       name: "Malmö",
-      weatherDescription: "Molning",
+      weatherDescription: "Molnigt",
       temperatur: 15, 
     },
     {
@@ -24,14 +25,16 @@ const cityWeather : CityWeather[] = [
   ];
   //? mockdata slut
 
-function displayCard(): void {
+function displayCard(array: CityWeather[]): void {
+    console.log("displayCard is running for", array); //! test, remove this before production
+    
     const weatherSection = document.getElementById("weather-cards") as HTMLElement | null;
     if (!weatherSection) {
       console.error("Elementet med id 'weather-cards' hittades inte.");
       return;
     }
 
-    cityWeather.forEach((city) => { 
+    array.forEach((city) => { 
         const card: HTMLElement = document.createElement("article")
         const cityName: HTMLHeadingElement = document.createElement("h2");
         const weather: HTMLParagraphElement = document.createElement("p");
@@ -41,6 +44,13 @@ function displayCard(): void {
 
         cityName.classList.add("city");
         cityName.textContent = city.name;
+
+        if (city.icon) {
+            const icon: HTMLParagraphElement = document.createElement("p");
+            icon.classList.add("icon");
+            icon.textContent = city.icon;
+            card.appendChild(icon);
+        }
 
         weather.classList.add("weather");
         weather.textContent = city.weatherDescription;
@@ -53,31 +63,6 @@ function displayCard(): void {
     });
 }
 
-displayCard();
-
-
-type Card = { //! Card interface type, temporary
-    city: string,
-    icon?: string,
-    weather: string,
-    temperature: string,
-    humidity?: string,
-    wind?: string
-}
-
-// mock-array with weather cards // todo gör så att icon läggs in
-const cards: Card[] = [
-    {
-        city: 'Göteborg',
-        weather: 'Regn',
-        temperature: '5 °C',
-    },
-    {
-        city: 'Malmö',
-        weather: 'Sol',
-        temperature: '8 °C',
-    }
-]
 
 
 function saveToLocalStorage<T>(key: string, data: T): void {
@@ -88,7 +73,7 @@ function saveToLocalStorage<T>(key: string, data: T): void {
     }
 }
 
-const weatherCards: Card[] = cards; //todo add cards
+const weatherCards: CityWeather[] = cityWeather; //todo add cards
 saveToLocalStorage('weatherCards', weatherCards); // runs saveToLocalStorage for each card in the array
 
 
@@ -103,29 +88,36 @@ function getFromLocalStorage<T>(key: string): T | null {
     }
 }
 
-const retrievedWeatherCards = getFromLocalStorage<Card[]>('weatherCards');
+const retrievedWeatherCards = getFromLocalStorage<CityWeather[]>('weatherCards');
 console.log(retrievedWeatherCards); // This will log your array of cards
 
 
 
 // todo: Function to assign icons to array objects
-function assignIconsToCards(cards: Card[]): Card[] { // todo: Replace placeholder strings with actual
+function assignIconsToCards(cards: CityWeather[]): CityWeather[] { // todo: Replace placeholder strings with actual
     return cards.map((card) => ({
         ...card,
         icon: (() => {
-            switch (card.weather) {
+            switch (card.weatherDescription) {
                 case 'Regn':
                     return '🌧️';
                 case 'Sol':
                 case 'Klart':
                     return '☀️';
-                case 'Moln':
+                case 'Molnigt':
                     return '🌥️';
                 case 'Delvis molnigt':
                     return '🌤️';
                 case 'Dimma':
                     return '🌫️';
+                case 'Åska':
+                    return '🌩️';
+                case 'Snö':
+                    return '❄️';
                 case 'Storm':
+                    return '⛈️🌪️';
+                case 'Blåsigt':
+                    return '💨';
                 default:
                     return '';
             }
@@ -133,5 +125,7 @@ function assignIconsToCards(cards: Card[]): Card[] { // todo: Replace placeholde
     }));
 }
 
-const cardsWithIcons = assignIconsToCards(cards);
+const cardsWithIcons = assignIconsToCards(weatherCards);
 console.log(cardsWithIcons);
+
+displayCard(cardsWithIcons); //! runs the function and displays the cards
