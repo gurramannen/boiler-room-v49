@@ -1,2 +1,34 @@
 
 
+/* <main>
+        <section id="weather-cards">
+            <article class="card">
+                <h2 class="city">City Name</h2>
+                <h3 class="weather">Weather</h3>
+                <h3 class="temperature">Temp</h3>
+                <h4 class="humidity">Humidity</h4>
+                <h5 class="wind">Wind</h5>
+            </article>
+        </section>
+    </main> */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        width: 100vw;
+    }
+
+    header {
+
+    }
+    
+    body {
+        width: 100vw;
+        background-color: #333;
+        color: #fff;
+        
+    }
+
