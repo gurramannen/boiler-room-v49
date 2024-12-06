@@ -86,15 +86,18 @@
 
     /*** Weather styles ***/
     .clear {
-
+        background-color: #22b5c0;
+        color: #1f170e;
     }
 
     .clouds {
-
+        background-color: #72b0b8;
+        color: #1f170e;
     }
 
     .fog {
-
+        background-color: #585858;
+        color: white;
     }
 
     .rain {
@@ -102,23 +105,25 @@
     }
 
     .snow { 
-
+        background-color: azure;
+        color: #292929;
     }
 
     .storm {
-
+        background-color: #444;
     }
 
     .sunny {
-
+        background-color: #f5ee99;
+        color: #1f170e;
     }
 
     .thunderstorm {
-
+        background-color: #0d203a;
     }
 
     .windy {
-
+        background-color: #585858;
     }
 
 

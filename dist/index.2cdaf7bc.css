@@ -65,7 +65,44 @@ body {
   grid-area: wind;
 }
 
+.clear {
+  color: #1f170e;
+  background-color: #22b5c0;
+}
+
+.clouds {
+  color: #1f170e;
+  background-color: #72b0b8;
+}
+
+.fog {
+  color: #fff;
+  background-color: #585858;
+}
+
 .rain {
   background-color: #3a4c64;
+}
+
+.snow {
+  color: #292929;
+  background-color: azure;
+}
+
+.storm {
+  background-color: #444;
+}
+
+.sunny {
+  color: #1f170e;
+  background-color: #f5ee99;
+}
+
+.thunderstorm {
+  background-color: #0d203a;
+}
+
+.windy {
+  background-color: #585858;
 }
 /*# sourceMappingURL=index.2cdaf7bc.css.map */
