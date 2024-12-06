@@ -47,5 +47,18 @@ function saveToLocalStorage(key, data) {
         console.error(`Failed to save data to local storage with key "${key}"`, error);
     }
 }
+// const weatherCards: Card[] = [...]; //todo add cards
+saveToLocalStorage('weatherCards', weatherCards); // runs saveToLocalStorage for each card in the array
+/* Get data from local storage */ function getFromLocalStorage(key) {
+    try {
+        const data = localStorage.getItem(key);
+        return data ? JSON.parse(data) : null;
+    } catch (error) {
+        console.error(`Failed to retrieve data from local storage with key "${key}"`, error);
+        return null;
+    }
+}
+const retrievedWeatherCards = getFromLocalStorage('weatherCards');
+console.log(retrievedWeatherCards); // This will log your array of cards
 
 //# sourceMappingURL=index.86da7ba5.js.map
