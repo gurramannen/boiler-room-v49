@@ -186,3 +186,35 @@ function getFromLocalStorage<T>(key: string): T | null {
 }
 const retrievedWeatherCards = getFromLocalStorage<City[]>('weatherCards');
 console.log(retrievedWeatherCards); // This will log your array of cards
+
+// HTML: Add a dropdown menu
+const dropdown = document.createElement('select');
+dropdown.id = "city-dropdown";
+document.body.prepend(dropdown);
+
+// Populate dropdown with city names
+cities.forEach(city => {
+    const option = document.createElement('option');
+    option.value = city.name;
+    option.textContent = city.name;
+    dropdown.appendChild(option);
+});
+
+// Add event listener to dropdown
+const weatherSection = document.getElementById("weather-cards") as HTMLElement | null;
+if (weatherSection) weatherSection.innerHTML = ""; // Ensure no cards are displayed initially
+
+dropdown.addEventListener('change', async (event) => {
+    const selectedCityName = (event.target as HTMLSelectElement).value;
+
+    // Clear existing weather cards
+    if (weatherSection) weatherSection.innerHTML = "";
+
+    // Fetch and display weather for the selected city
+    const selectedCity = cities.find(city => city.name === selectedCityName);
+    if (selectedCity) {
+        const cityWeather = await fetchCityWeather(selectedCity);
+        const weatherCard = assignIconsToCards([cityWeather]);
+        displayCard(weatherCard);
+    }
+});
