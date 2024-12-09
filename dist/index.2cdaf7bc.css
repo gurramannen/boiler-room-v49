@@ -79,26 +79,26 @@ body {
   grid-area: wind;
 }
 
-.clear, .klar-himmel {
+.clear, .klarhimmel {
   color: #1f170e;
   background-color: #22b5c0;
 }
 
-.clouds, .molnigt, .delvis-molnigt {
+.clouds, .molnigt, .delvismolnigt, .växlandemolnighet {
   color: #1f170e;
   background-color: #72b0b8;
 }
 
-.fog {
+.fog, .dimma {
   color: #fff;
   background-color: #585858;
 }
 
-.rain, .regn, .lätt-regn {
+.rain, .regn, .lättregn {
   background-color: #3a4c64;
 }
 
-.snow {
+.snow, .snö {
   color: #292929;
   background-color: azure;
 }

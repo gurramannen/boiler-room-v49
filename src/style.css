@@ -89,26 +89,26 @@
     }
 
     /*** Weather styles ***/
-    .clear, .klar-himmel {
+    .clear, .klarhimmel {
         background-color: #22b5c0;
         color: #1f170e;
     }
 
-    .clouds, .molnigt, .delvis-molnigt {
+    .clouds, .molnigt, .delvismolnigt, .växlandemolnighet {
         background-color: #72b0b8;
         color: #1f170e;
     }
 
-    .fog {
+    .fog, .dimma{
         background-color: #585858;
         color: white;
     }
 
-    .rain, .regn, .lätt-regn {
+    .rain, .regn, .lättregn {
         background-color: #3a4c64;
     }
 
-    .snow { 
+    .snow, .snö{ 
         background-color: azure;
         color: #292929;
     }
