@@ -162,7 +162,7 @@ function displayCard(array) {
         const cityName = document.createElement("h2");
         const weather = document.createElement("p");
         const temperature = document.createElement("p");
-        card.classList.add("card", city.weatherDescription.split(" ").join("-"));
+        card.classList.add("card");
         cityName.classList.add("city");
         cityName.textContent = city.name;
         if (city.icon) {
@@ -199,5 +199,31 @@ saveToLocalStorage('weatherCards', weatherCards); // runs saveToLocalStorage for
 }
 const retrievedWeatherCards = getFromLocalStorage('weatherCards');
 console.log(retrievedWeatherCards); // This will log your array of cards
+// HTML: Add a dropdown menu
+const dropdown = document.createElement('select');
+dropdown.id = "city-dropdown";
+document.body.prepend(dropdown);
+// Populate dropdown with city names
+cities.forEach((city)=>{
+    const option = document.createElement('option');
+    option.value = city.name;
+    option.textContent = city.name;
+    dropdown.appendChild(option);
+});
+// Add dropdown
+const weatherSection = document.getElementById("weather-cards");
+if (weatherSection) weatherSection.innerHTML = "";
+dropdown.addEventListener('change', async (event)=>{
+    const selectedCityName = event.target.value;
+    if (weatherSection) weatherSection.innerHTML = "";
+    const selectedCity = cities.find((city)=>city.name === selectedCityName);
+    if (selectedCity) {
+        const cityWeather = await fetchCityWeather(selectedCity);
+        const weatherCard = assignIconsToCards([
+            cityWeather
+        ]);
+        displayCard(weatherCard);
+    }
+});
 
 //# sourceMappingURL=index.86da7ba5.js.map

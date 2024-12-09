@@ -22,9 +22,13 @@ body {
   width: 100vw;
 }
 
+#description {
+  text-align: center;
+  margin-top: 10px;
+}
+
 #weather-cards {
   background-color: inherit;
-  border: 1px solid #a63535;
   flex-flow: wrap;
   justify-content: center;
   margin: 2rem;

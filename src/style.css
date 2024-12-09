@@ -25,9 +25,14 @@
         
     }
 
+    #description  {
+        text-align: center;
+        margin-top: 10px;
+    }
+
     #weather-cards {
         margin: 2rem;
-        border: #a63535 solid 1px; /* temporary border */
+      /*   border: #a63535 solid 1px; /* temporary border */ 
         background-color: inherit;
         display: flex;
         flex-direction: row;
