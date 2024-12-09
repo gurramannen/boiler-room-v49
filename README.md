@@ -23,6 +23,4 @@ stand up 4 15:30
 
 Kolla så allt är mergat i staging branch och hur det har gått för alla.
 kollat igenom trello så att alla kort är in progress eller done.
-Felsökt koden lite och 
-
-möte 10:00 måndag
+Felsökt koden lite och lagt till dropdown funciton
