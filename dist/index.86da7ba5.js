@@ -162,7 +162,7 @@ function displayCard(array) {
         const cityName = document.createElement("h2");
         const weather = document.createElement("p");
         const temperature = document.createElement("p");
-        const className = city.weatherDescription.replace(/\s+/g, '');
+        const className = city.weatherMain.toLowerCase().replace(/\s+/g, '');
         card.classList.add("card", className);
         cityName.classList.add("city");
         cityName.textContent = city.name;
