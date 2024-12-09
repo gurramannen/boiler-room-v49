@@ -18,3 +18,11 @@ stand up 3 13:00
 Mandus joinar oss vi går igenom vad vi har jobbat med och ställer lite frågor kring hur vi lägger in våran api key i en .env fil.
 Vi löste felet genom att bara köra api och url i TS filen.
 Vi delade ut trello korten och uppdaterade vilka trello kort som ska göras samt planerat vad alla ska göra i de olika stegen.
+
+stand up 4 15:30
+
+Kolla så allt är mergat i staging branch och hur det har gått för alla.
+kollat igenom trello så att alla kort är in progress eller done.
+Felsökt koden lite och 
+
+möte 10:00 måndag
