@@ -200,17 +200,15 @@ cities.forEach(city => {
     dropdown.appendChild(option);
 });
 
-// Add event listener to dropdown
+// Add dropdown
 const weatherSection = document.getElementById("weather-cards") as HTMLElement | null;
-if (weatherSection) weatherSection.innerHTML = ""; // Ensure no cards are displayed initially
+if (weatherSection) weatherSection.innerHTML = ""; 
 
 dropdown.addEventListener('change', async (event) => {
     const selectedCityName = (event.target as HTMLSelectElement).value;
 
-    // Clear existing weather cards
     if (weatherSection) weatherSection.innerHTML = "";
 
-    // Fetch and display weather for the selected city
     const selectedCity = cities.find(city => city.name === selectedCityName);
     if (selectedCity) {
         const cityWeather = await fetchCityWeather(selectedCity);
